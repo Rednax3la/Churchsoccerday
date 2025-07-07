@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Soccer Day - July 26th</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid gold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,100 M100,0 L0,100" stroke="rgba(255,215,0,0.1)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+
+        .title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 100, 0, 0.8);
+            background: linear-gradient(to right, gold, orange, gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        .fire {
+            display: inline-block;
+            animation: fire-animation 1.5s infinite alternate;
+            font-size: 2.5rem;
+        }
+
+        .soccer-ball {
+            display: inline-block;
+            animation: spin 5s infinite linear;
+            font-size: 2.2rem;
+        }
+
+        .event-details {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 15px;
+            min-width: 180px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .detail-card i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: gold;
+        }
+
+        .content {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin: 25px 0;
+            color: gold;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, gold, transparent);
+            margin: 10px auto;
+        }
+
+        .opponents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .opponent {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .opponent:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .opponent i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #ff9900;
+        }
+
+        .highlight {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            border-left: 4px solid gold;
+        }
+
+        .highlight i {
+            color: gold;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .register {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(0, 100, 0, 0.3);
+            border-radius: 15px;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .whatsapp-btn i {
+            margin-right: 8px;
+        }
+
+        .hashtags {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fire-animation {
+            0% { text-shadow: 0 0 10px rgba(255, 50, 0, 0.8); }
+            100% { text-shadow: 0 0 20px rgba(255, 100, 0, 0.9), 0 0 30px rgba(255, 50, 0, 0.7); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .event-details {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .detail-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .opponents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">
+                <span class="soccer-ball">⚽</span>
+                <span class="fire">🔥</span> CHURCH SOCCER DAY JULY 26TH! <span class="fire">🔥</span>
+                <span class="soccer-ball">⚽</span>
+            </h1>
+            
+            <div class="event-details">
+                <div class="detail-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>📍 Riara Springs, Imara Daima</h3>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>🕘 Kickoff at 9:00 AM</h3>
+                </div>
+            </div>
+        </header>
+        
+        <main class="content">
+            <p class="description" style="text-align: center; font-size: 1.3rem; margin-bottom: 30px;">
+                Get ready for a powerful day of football, faith, and fellowship! 🙌🏽
+            </p>
+            
+            <h2 class="section-title">Teams We'll Face</h2>
+            <div class="opponents-grid">
+                <div class="opponent">
+                    <i class="fas fa-school"></i>
+                    <h3>🏫 Riara School</h3>
+                </div>
+                <div class="opponent">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>🎯 Infil Academy</h3>
+                </div>
+                <div class="opponent">
+                    <i class="fas fa-eagle"></i>
+                    <h3>🦅 Super Eagles</h3>
+                </div>
+                <div class="opponent">
+                    <i class="fas fa-home"></i>
+                    <h3>🏡 Hawa Home</h3>
+                </div>
+                <div class="opponent">
+                    <i class="fas fa-fist-raised"></i>
+                    <h3>💪 Tumaini</h3>
+                </div>
+                <div class="opponent">
+                    <i class="fas fa-church"></i>
+                    <h3>🙏 STANDS Church School</h3>
+                </div>
+                <div class="opponent">
+                    <i class="fas fa-cross"></i>
+                    <h3>😎 Crossroads</h3>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <i class="fas fa-utensils"></i>
+                <p>Bring your A-game, your cheering voice, and your appetite because there'll be great food, good vibes, and even better company! 🍔🎶</p>
+            </div>
+            
+            <div class="highlight floating">
+                <i class="fas fa-trophy"></i>
+                <p>🏆 Trophies for the Winning Team and the MVPs of the Day!</p>
+            </div>
+            
+            <div class="register">
+                <h2 class="section-title">Join the Fun!</h2>
+                <p>👉 To join the fun, register at the Cloisters or WhatsApp Tr. Victoria:</p>
+                <a href="https://wa.me/254710146946" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Now: 0710146946
+                </a>
+            </div>
+            
+            <div class="highlight">
+                <i class="fas fa-star"></i>
+                <p>Let's grow, connect, and shine for Christ on and off the field! ✨</p>
+                <p style="margin-top: 15px; font-size: 1.2rem;">🗓️ Save the date: July 26th!</p>
+            </div>
+            
+            <div class="hashtags">
+                #ChurchVibes #FaithAndFootball #MVPForJesus #FunFellowshipFootball
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>⚽ Church Soccer Day 2024 | Bringing Faith and Football Together ⚽</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Add subtle animations when scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe each section
+            document.querySelectorAll('.header, .content > *').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(section);
+            });
+            
+            // Add CSS for fadeInUp animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
